@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+db:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  dbname: funding
+  sslmode: disable
+
+exchanges:
+  pacifica:
+    api_key: ""
+    base_url: "https://api.pacifica.fi/api"
+  lighter:
+    api_key: ""
+    base_url: "https://mainnet.zklighter.elliot.ai/api"
+  extended:
+    api_key: ""
+    base_url: "https://api.starknet.extended.exchange/api"
+
+tracker:
+  update_interval: 15s
+
+log:
+  level: info
+  encoding: json
