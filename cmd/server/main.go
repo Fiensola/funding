@@ -111,7 +111,7 @@ func run() error {
 	}()
 
 	//interrupt
-	quitCh := make(chan os.Signal, 1)
+	quitCh := make(chan os.Signal, 2)
 	signal.Notify(quitCh, syscall.SIGINT, syscall.SIGTERM)
 	<-quitCh
 
