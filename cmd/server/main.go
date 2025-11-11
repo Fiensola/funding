@@ -13,6 +13,7 @@ import (
 	"github.com/fiensola/funding/internal/config"
 	"github.com/fiensola/funding/internal/exchange"
 	"github.com/fiensola/funding/internal/exchange/extended"
+	"github.com/fiensola/funding/internal/exchange/hibachi"
 	"github.com/fiensola/funding/internal/exchange/lighter"
 	"github.com/fiensola/funding/internal/exchange/pacifica"
 	"github.com/fiensola/funding/internal/logger"
@@ -74,6 +75,9 @@ func run() error {
 		}, logger),
 		extended.NewClient(exchange.Config{
 			BaseURL: cfg.Exchages.Extended.BaseURL,
+		}, logger),
+		hibachi.NewClient(exchange.Config{
+			BaseURL: cfg.Exchages.Hibachi.BaseURL,
 		}, logger),
 	}
 

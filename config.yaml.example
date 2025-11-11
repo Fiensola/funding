@@ -19,6 +19,9 @@ exchanges:
   extended:
     api_key: ""
     base_url: "https://api.starknet.extended.exchange/api"
+  hibachi:
+    api_key: ""
+    base_url: "https://data-api.hibachi.xyz"
 
 tracker:
   update_interval: 15s
