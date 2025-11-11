@@ -69,15 +69,19 @@ func run() error {
 	exchanges := []exchange.Exchange{
 		pacifica.NewClient(exchange.Config{
 			BaseURL: cfg.Exchages.Pacifica.BaseURL,
+			Proxy:   cfg.Proxy,
 		}, logger),
 		lighter.NewClient(exchange.Config{
 			BaseURL: cfg.Exchages.Lighter.BaseURL,
+			Proxy:   cfg.Proxy,
 		}, logger),
 		extended.NewClient(exchange.Config{
 			BaseURL: cfg.Exchages.Extended.BaseURL,
+			Proxy:   cfg.Proxy,
 		}, logger),
 		hibachi.NewClient(exchange.Config{
 			BaseURL: cfg.Exchages.Hibachi.BaseURL,
+			Proxy:   cfg.Proxy,
 		}, logger),
 	}
 

@@ -11,17 +11,16 @@ db:
 
 exchanges:
   pacifica:
-    api_key: ""
-    base_url: "https://api.pacifica.fi/api"
+    base_url: https://api.pacifica.fi/api
   lighter:
-    api_key: ""
-    base_url: "https://mainnet.zklighter.elliot.ai/api"
+    base_url: https://mainnet.zklighter.elliot.ai/api
   extended:
-    api_key: ""
-    base_url: "https://api.starknet.extended.exchange/api"
+    base_url: https://api.starknet.extended.exchange/api
   hibachi:
-    api_key: ""
-    base_url: "https://data-api.hibachi.xyz"
+    base_url: https://data-api.hibachi.xyz
+
+#http://user:pass@host:port
+proxy: 
 
 tracker:
   update_interval: 15s

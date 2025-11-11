@@ -12,6 +12,6 @@ type Exchange interface {
 }
 
 type Config struct {
-	APIKey string
 	BaseURL string
+	Proxy string
 }

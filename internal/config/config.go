@@ -33,6 +33,8 @@ type Config struct {
 		} `mapstructure:"hibachi"`
 	} `mapstructure:"exchanges"`
 
+	Proxy string `mapstructure:"proxy"`
+
 	Tracker struct {
 		UpdateInterval time.Duration `mapstructure:"update_interval"`
 	} `mapstructure:"tracker"`

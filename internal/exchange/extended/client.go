@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strconv"
 	"time"
 
@@ -20,12 +21,24 @@ type Client struct {
 }
 
 func NewClient(config exchange.Config, logger *zap.Logger) *Client {
+	transport := &http.Transport{}
+
+	if config.Proxy != "" {
+		proxyUrl, err := url.Parse(config.Proxy)
+		if err == nil && proxyUrl != nil {
+			transport.Proxy = http.ProxyURL(proxyUrl)
+		}
+	}
+
+	httpClient := &http.Client{
+		Timeout:   5 * time.Second,
+		Transport: transport,
+	}
+
 	return &Client{
-		config: config,
-		httpClient: &http.Client{
-			Timeout: 30 * time.Second,
-		},
-		logger: logger,
+		config:     config,
+		httpClient: httpClient,
+		logger:     logger,
 	}
 }
 
