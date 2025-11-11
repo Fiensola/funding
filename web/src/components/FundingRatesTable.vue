@@ -79,7 +79,7 @@ const tableRows = computed(() => {
     const rates = Object.values(item.exchanges);
     const minRate = rates.length > 0 ? Math.min(...rates) : 0;
     const maxRate = rates.length > 0 ? Math.max(...rates) : 0;
-    let maxDiff = 0;
+    let maxDiff = sortDesc.value ? -Infinity: Infinity;
     if (rates.length > 1) {
       maxDiff = maxRate - minRate;
     }
@@ -99,8 +99,9 @@ const tableRows = computed(() => {
 const sortedRows = computed(() => {
   if (!sortKey.value) return tableRows.value;
   return [...tableRows.value].sort((a, b) => {
-    const aVal = typeof a[sortKey.value!] === 'number' ? a[sortKey.value!] : -Infinity;
-    const bVal = typeof b[sortKey.value!] === 'number' ? b[sortKey.value!] : -Infinity;
+    const aVal = typeof a[sortKey.value!] === 'number' ? a[sortKey.value!] : undefined;
+    const bVal = typeof b[sortKey.value!] === 'number' ? b[sortKey.value!] : undefined;
+
     if (typeof aVal === 'number' && typeof bVal === 'number') {
       return sortDesc.value ? bVal - aVal : aVal - bVal;
     }
@@ -122,7 +123,7 @@ const formatRate = (value: string | number | undefined): string => {
   if (typeof value == "string") {
     return ""
   }
-  return value.toFixed(6);
+  return value.toFixed(4);
 };
 
 const getRateClass = (value: string | number | undefined): string => {
@@ -178,7 +179,7 @@ const getHighlightClass = (value: string | number | undefined, minRate: number, 
             {{ formatRate(row[ex]) }}
           </td>
           <td class="max-diff-cell">
-            {{ row.maxDiff.toFixed(6) }}
+            {{ row.maxDiff === Infinity || row.maxDiff === -Infinity ? '—' : row.maxDiff.toFixed(4) }}
           </td>
         </tr>
       </tbody>
