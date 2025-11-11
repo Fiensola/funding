@@ -95,7 +95,7 @@ func (h *Handler) GetFundingRates(c *gin.Context) {
 		if _, ok := symbols[rate.Symbol]; !ok {
 			inner := Symbol{
 				Exchanges: map[string]float64{
-					rate.Exchange: rate.Rate,
+					rate.Exchange: rate.Rate * 100,
 				},
 				UpdatedAt: map[string]time.Time{
 					rate.Exchange: rate.Timestamp,
@@ -103,7 +103,7 @@ func (h *Handler) GetFundingRates(c *gin.Context) {
 			}
 			symbols[rate.Symbol] = inner
 		} else {
-			symbols[rate.Symbol].Exchanges[rate.Exchange] = rate.Rate
+			symbols[rate.Symbol].Exchanges[rate.Exchange] = rate.Rate * 100
 			symbols[rate.Symbol].UpdatedAt[rate.Exchange] = rate.Timestamp
 		}
 
