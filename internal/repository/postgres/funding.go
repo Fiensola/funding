@@ -91,7 +91,7 @@ func (f *FundingRepository) GetLatest(
 		SELECT DISTINCT ON (exchange, symbol)
 			id, exchange, symbol, price, rate, timestamp, next_funding, created_at
 		FROM funding_rates
-		WHERE (exchange='lighter' or exchange='extended')
+		WHERE (exchange='lighter' or exchange='backpack')
 	`
 
 	args := []any{}

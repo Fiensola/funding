@@ -16,21 +16,20 @@ type Config struct {
 
 	Exchages struct {
 		Pacifica struct {
-			APIKey  string `mapstructure:"api_key"`
 			BaseURL string `mapstructure:"base_url"`
 		} `mapstructure:"pacifica"`
 		Lighter struct {
-			APIKey  string `mapstructure:"api_key"`
 			BaseURL string `mapstructure:"base_url"`
 		} `mapstructure:"lighter"`
 		Extended struct {
-			APIKey  string `mapstructure:"api_key"`
 			BaseURL string `mapstructure:"base_url"`
 		} `mapstructure:"extended"`
 		Hibachi struct {
-			APIKey  string `mapstructure:"api_key"`
 			BaseURL string `mapstructure:"base_url"`
 		} `mapstructure:"hibachi"`
+		Backpack struct {
+			BaseURL string `mapstructure:"base_url"`
+		} `mapstructure:"backpack"`
 	} `mapstructure:"exchanges"`
 
 	Proxy string `mapstructure:"proxy"`

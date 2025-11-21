@@ -12,6 +12,7 @@ import (
 	"github.com/fiensola/funding/internal/api"
 	"github.com/fiensola/funding/internal/config"
 	"github.com/fiensola/funding/internal/exchange"
+	"github.com/fiensola/funding/internal/exchange/backpack"
 	"github.com/fiensola/funding/internal/exchange/extended"
 	"github.com/fiensola/funding/internal/exchange/hibachi"
 	"github.com/fiensola/funding/internal/exchange/lighter"
@@ -81,6 +82,10 @@ func run() error {
 		}, logger),
 		hibachi.NewClient(exchange.Config{
 			BaseURL: cfg.Exchages.Hibachi.BaseURL,
+			Proxy:   cfg.Proxy,
+		}, logger),
+		backpack.NewClient(exchange.Config{
+			BaseURL: cfg.Exchages.Backpack.BaseURL,
 			Proxy:   cfg.Proxy,
 		}, logger),
 	}

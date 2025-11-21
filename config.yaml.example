@@ -11,13 +11,21 @@ db:
 
 exchanges:
   pacifica:
+    is_active: false
     base_url: https://api.pacifica.fi/api
   lighter:
+    is_active: true
+    proxy: 
     base_url: https://mainnet.zklighter.elliot.ai/api
   extended:
+    is_active: false
     base_url: https://api.starknet.extended.exchange/api
   hibachi:
+    is_active: false
     base_url: https://data-api.hibachi.xyz
+  backpack:
+    is_active: true
+    base_url: https://api.backpack.exchange/api
 
 #http://user:pass@host:port
 proxy: 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/fiensola/funding/internal/domain"
@@ -17,11 +18,10 @@ type Client struct {
 	config     exchange.Config
 	httpClient *http.Client
 	logger     *zap.Logger
-	de exchange.DefaultExchange
 }
 
 func NewClient(config exchange.Config, logger *zap.Logger) *Client {
-	transport := exchange.DefaultExchange
+	transport := &http.Transport{}
 
 	httpClient := &http.Client{
 		Timeout:   5 * time.Second,
@@ -36,23 +36,17 @@ func NewClient(config exchange.Config, logger *zap.Logger) *Client {
 }
 
 func (c *Client) Name() string {
-	return "extended"
+	return "backpack"
 }
 
-type fundingResponse struct {
-	Data []struct {
-		Rate        float64 `json:"rate"`
-		Symbol      string  `json:"assetName"`
-		IsActive    bool    `json:"active"`
-		MarketStats struct {
-			Rate string `json:"fundingRate"`
-		} `json:"marketStats"`
-	} `json:"data"`
-	Status string `json:"status"`
+type fundingResponse []struct {
+	Rate   string `json:"fundingRate"`
+	Symbol string `json:"symbol"`
+	Price  string `json:"markPrice"`
 }
 
 func (c *Client) FetchFundingRates(ctx context.Context) ([]domain.FundingRate, error) {
-	url := fmt.Sprintf("%s/v1/info/markets", c.config.BaseURL)
+	url := fmt.Sprintf("%s/v1/markPrices", c.config.BaseURL)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -79,16 +73,17 @@ func (c *Client) FetchFundingRates(ctx context.Context) ([]domain.FundingRate, e
 	now := time.Now()
 	rates := make([]domain.FundingRate, 0)
 
-	for _, item := range fundingResp.Data {
-		if item.IsActive {
-			rate, _ := strconv.ParseFloat(item.MarketStats.Rate, 64)
-			rates = append(rates, domain.FundingRate{
-				Exchange:  c.Name(),
-				Symbol:    item.Symbol,
-				Rate:      rate,
-				Timestamp: now,
-			})
-		}
+	for _, item := range fundingResp {
+		rate, _ := strconv.ParseFloat(item.Rate, 64)
+		price, _ := strconv.ParseFloat(item.Price, 64)
+		symbolWords := strings.Split(item.Symbol, "_")
+		rates = append(rates, domain.FundingRate{
+			Exchange:  c.Name(),
+			Symbol:    symbolWords[0],
+			Rate:      rate,
+			Price:     &price,
+			Timestamp: now,
+		})
 	}
 
 	c.logger.Info("fetched funding rates",
