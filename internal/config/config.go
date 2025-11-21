@@ -16,19 +16,25 @@ type Config struct {
 
 	Exchages struct {
 		Pacifica struct {
-			BaseURL string `mapstructure:"base_url"`
+			IsActive bool   `mapstructure:"is_active"`
+			BaseURL  string `mapstructure:"base_url"`
 		} `mapstructure:"pacifica"`
 		Lighter struct {
-			BaseURL string `mapstructure:"base_url"`
+			IsActive bool   `mapstructure:"is_active"`
+			BaseURL  string `mapstructure:"base_url"`
+			Proxy    string `mapstructure:"proxy"`
 		} `mapstructure:"lighter"`
 		Extended struct {
-			BaseURL string `mapstructure:"base_url"`
+			IsActive bool   `mapstructure:"is_active"`
+			BaseURL  string `mapstructure:"base_url"`
 		} `mapstructure:"extended"`
 		Hibachi struct {
-			BaseURL string `mapstructure:"base_url"`
+			IsActive bool   `mapstructure:"is_active"`
+			BaseURL  string `mapstructure:"base_url"`
 		} `mapstructure:"hibachi"`
 		Backpack struct {
-			BaseURL string `mapstructure:"base_url"`
+			IsActive bool   `mapstructure:"is_active"`
+			BaseURL  string `mapstructure:"base_url"`
 		} `mapstructure:"backpack"`
 	} `mapstructure:"exchanges"`
 

@@ -12,6 +12,7 @@ type Exchange interface {
 }
 
 type Config struct {
-	BaseURL string
-	Proxy string
+	BaseURL  string
+	Proxy    string
+	IsActive bool
 }

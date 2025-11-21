@@ -69,24 +69,29 @@ func run() error {
 	//exchanges
 	exchanges := []exchange.Exchange{
 		pacifica.NewClient(exchange.Config{
-			BaseURL: cfg.Exchages.Pacifica.BaseURL,
-			Proxy:   cfg.Proxy,
+			BaseURL:  cfg.Exchages.Pacifica.BaseURL,
+			Proxy:    cfg.Proxy,
+			IsActive: cfg.Exchages.Pacifica.IsActive,
 		}, logger),
 		lighter.NewClient(exchange.Config{
-			BaseURL: cfg.Exchages.Lighter.BaseURL,
-			Proxy:   cfg.Proxy,
+			BaseURL:  cfg.Exchages.Lighter.BaseURL,
+			Proxy:    cfg.Exchages.Lighter.Proxy,
+			IsActive: cfg.Exchages.Lighter.IsActive,
 		}, logger),
 		extended.NewClient(exchange.Config{
-			BaseURL: cfg.Exchages.Extended.BaseURL,
-			Proxy:   cfg.Proxy,
+			BaseURL:  cfg.Exchages.Extended.BaseURL,
+			Proxy:    cfg.Proxy,
+			IsActive: cfg.Exchages.Extended.IsActive,
 		}, logger),
 		hibachi.NewClient(exchange.Config{
-			BaseURL: cfg.Exchages.Hibachi.BaseURL,
-			Proxy:   cfg.Proxy,
+			BaseURL:  cfg.Exchages.Hibachi.BaseURL,
+			Proxy:    cfg.Proxy,
+			IsActive: cfg.Exchages.Hibachi.IsActive,
 		}, logger),
 		backpack.NewClient(exchange.Config{
-			BaseURL: cfg.Exchages.Backpack.BaseURL,
-			Proxy:   cfg.Proxy,
+			BaseURL:  cfg.Exchages.Backpack.BaseURL,
+			Proxy:    cfg.Proxy,
+			IsActive: cfg.Exchages.Backpack.IsActive,
 		}, logger),
 	}
 

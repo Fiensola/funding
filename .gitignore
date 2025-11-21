@@ -14,6 +14,7 @@ logs
 bin/
 pkg/
 target/
+web/node_modules
 
 # IDE
 .vscode/
